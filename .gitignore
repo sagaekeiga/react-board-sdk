@@ -2,3 +2,5 @@ node_modules
 
 # Babel
 dist
+
+.DS_Store
