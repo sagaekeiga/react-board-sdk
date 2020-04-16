@@ -1,6 +1,7 @@
 node_modules
 
 # Babel
-dist
+dist/
 
 .DS_Store
+.env
