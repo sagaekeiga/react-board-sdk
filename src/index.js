@@ -1,6 +1,45 @@
-import ReactBoard from './reactBoard.js'
-// import Views from './views.js'
+import views from './views';
+import element from './element';
+import bugReport from './bugReport';
 
-const reactBoard = new ReactBoard()
-reactBoard.addSubmitForm()
-reactBoard.addReportButton()
+const domReady = (callback) => {
+  if (document.readyState === 'complete' || document.readyState === 'loaded' || document.readyState === 'interactive') {
+    callback();
+  } else {
+    document.addEventListener('DOMContentLoaded', callback);
+  }
+};
+
+/**
+ * initSDK - 初期化処理
+ */
+function initSDK() {
+  domReady(() => {
+    views.addReportButton();
+    element.hide('#reactboardSDK');
+  });
+
+  domReady(() => {
+    element.show('#reactboardSDK');
+  });
+}
+
+/**
+ * RbdSdk - rbd SDK オブジェクト
+ */
+function RbdSdk() {
+  return {
+    init: initSDK,
+    invoke: views.initBugreportViews,
+    submitReport: bugReport.submitBugReport
+  };
+}
+
+window.ReactboardSDK = RbdSdk;
+const sdk = new RbdSdk();
+window.rbdSdk = sdk;
+
+
+export default {
+  reactboardSDK: RbdSdk,
+};
