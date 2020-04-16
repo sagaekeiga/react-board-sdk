@@ -1,12 +1,19 @@
 import './views/styles.css';
 import utils from './utils';
 import elem from './element';
+import html2canvas from 'html2canvas';
 
 const loadingWindowView = require('./views/loading-window.html');
 const ThankyouView = require('./views/thank-you.html');
 const submitFormView = require('./views/submitForm.html');
 
-function addSubmitForm() {
+const takeScreenShot = () => {
+  html2canvas(document.querySelector('body')).then(canvas => {
+    const imgData = canvas.toDataURL();
+    document.getElementById('capture').src = imgData;
+  });
+}
+const addSubmitForm = () => {
   const node = document.createElement('div');
 
   node.setAttribute('class', 'rbdsdk-element reactboard-window reactboard-form');
@@ -15,6 +22,8 @@ function addSubmitForm() {
 
   node.innerHTML = submitFormView;
   document.body.appendChild(node);
+
+  takeScreenShot();
 }
 
 /**

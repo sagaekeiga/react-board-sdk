@@ -63,7 +63,7 @@
     right: 10px;
     bottom: 25px;
     padding: 20px;
-    width: 300px;
+    width: 1000px;
     border: 1px solid #eeeeee;
     border-radius: 3px;
     background-color: #ffffff;
@@ -73,7 +73,6 @@
 .reactboard-window.reactboard-form {
     display: none;
     padding: 16px 8px;
-    width: auto
 }
 .drawing-canvas-container {
     position: fixed;
