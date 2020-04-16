@@ -31,7 +31,8 @@ function RbdSdk() {
   return {
     init: initSDK,
     invoke: views.initBugreportViews,
-    submitReport: bugReport.submitBugReport
+    submitReport: bugReport.submitBugReport,
+    resetAndClose: views.resetAndClose,
   };
 }
 
@@ -41,5 +42,5 @@ window.rbdSdk = sdk;
 
 
 export default {
-  reactboardSDK: RbdSdk,
+  reactboardSDK: RbdSdk
 };

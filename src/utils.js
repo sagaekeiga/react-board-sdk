@@ -1,7 +1,7 @@
 /**
- * isMobile - checks if the current window is displayed on mobile or not, based on viewport size
+ * モバイルかどうかを返す
  *
- * @return {bool}  returns true if viewport is less than 767px or flase if larger than or equal
+ * @return {bool}  ビューポートが767px未満の場合はtrueを返し、それ以上の場合はfalseを返す
  */
 function isMobile() {
   let returnVal = false;

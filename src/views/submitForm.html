@@ -1,28 +1,21 @@
 <form id="reactboardForm">
-  <input
-    id="email"
-    class="instabug-input"
-    type="text"
-    name="email"
-    placeholder="Email"
-    value="" />
   <textarea
   id="comment"
-  class="instabug-input"
+  class="reactboard-input"
   name="comment"
-  placeholder="What went wrong?"
+  placeholder="どうしましたか？"
   rows="4"
   cols="50"></textarea>
 
   <button
     type="button"
     onclick="rbdSdk.submitReport()">
-    Submit Bug
+    報告する
   </button>
 
   <button
     type="button"
     onclick="rbdSdk.resetAndClose()">
-    Cancel
+    キャンセル
   </button>
 </form>

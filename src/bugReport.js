@@ -1,4 +1,4 @@
-import xhr from './xhr';
+import api from './api';
 import elem from './element';
 
 /**
@@ -9,7 +9,7 @@ function getBrowserData() {
   const currentBrowserData = {};
   let browserName = navigator.appName;
 
-  // browserName = nVer.match(/(firefox|msie|chrome|safari)[/\s]([\d.]+)/ig)[0];
+  browserName = nVer.match(/(firefox|msie|chrome|safari)[/\s]([\d.]+)/ig)[0];
   if (nVer.match(/(firefox|msie|chrome|safari)[/\s]([\d.]+)/ig)) {
     browserName = nVer.match(/(firefox|msie|chrome|safari)[/\s]([\d.]+)/ig)[0];
   } else {
@@ -30,39 +30,30 @@ function getBrowserData() {
 }
 
 /**
- * prepareBugReport - prepare and return the bug report object
+ * 報告用オブジェクトを返す
  *
- * @return {object} complete bug report object
+ * @return {object} 報告用オブジェクト
  */
 function prepareBugReport() {
   const form = document.getElementById('reactboardForm');
 
-  let report = {};
-  report = {
+  const report = {
     reported_at: Date.now(),
-    email: form.email.value,
     title: form.comment.value,
     device: getBrowserData().browserName,
     os: getBrowserData().Os,
     current_view: location.href,
-    // duration: utils.shortifyTime(Date.now() - reportStartingTime),
     locale: getBrowserData().locale,
     screen_size: `${window.innerWidth}x${window.innerHeight}`,
     density: window.devicePixelRatio,
     localStorage: JSON.stringify(localStorage),
-    // console_log: JSON.stringify(logs.getConsoleLog()),
   };
-
-  // if (getMemoryUsed()) {
-  //   report.memory = getMemoryUsed();
-  // }
 
   return report;
 }
 
 const _prepareBugReportRequest = (bugReportDetails) => {
-  console.log(bugReportDetails)
-  return xhr.executeXHR({
+  return api.createReport({
     body: bugReportDetails,
     stringify: true,
   });
@@ -70,39 +61,15 @@ const _prepareBugReportRequest = (bugReportDetails) => {
 
 function submitBugReport() {
   const bugReport = prepareBugReport();
-  // const uploadScreenshotRequest = _uploadBugScreenshot();
 
-  // elem.hide('#reactboardFormContainer');
-  // elem.show('#reactboardLoading');
+  elem.hide('#reactboardFormContainer');
+  elem.show('#reactboardLoading');
 
   _prepareBugReportRequest(bugReport)
     .finally(() => {
-      console.log(1111)
-      // elem.hide('#reactboardLoading');
-      // elem.show('#reactboardThankYouPage');
+      elem.hide('#reactboardLoading');
+      elem.show('#reactboardThankYouPage');
     });
-
-  // if no screenshot attached with the report, submit it direct, but if you found a screenshot
-  // upload it first, include its url the submit the report
-  // if (!uploadScreenshotRequest) {
-  //   _prepareBugReportRequest(bugReport)
-  //     .finally(() => {
-  //       elem.hide('#instabugLoading');
-  //       elem.show('#instabugThankYouPage');
-  //     });
-  // } else {
-  //   uploadScreenshotRequest.then((response) => {
-  //     if (response.status === 'OK' && response.data && response.data.secure_url) {
-  //       bugReport.screenshot = response.data.secure_url;
-  //     }
-  //   }).finally(() => {
-  //     _prepareBugReportRequest(bugReport)
-  //       .finally(() => {
-  //         elem.hide('#instabugLoading');
-  //         elem.show('#instabugThankYouPage');
-  //       });
-  //   });
-  // }
 }
 
 export default {
