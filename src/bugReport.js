@@ -46,13 +46,14 @@ function prepareBugReport() {
     locale: getBrowserData().locale,
     screen_size: `${window.innerWidth}x${window.innerHeight}`,
     density: window.devicePixelRatio,
+    image: document.getElementById('capture').src,
     localStorage: JSON.stringify(localStorage),
   };
 
   return report;
 }
 
-const _prepareBugReportRequest = (bugReportDetails) => {
+const _prepareBugReportRequest = bugReportDetails => {
   return api.createReport({
     body: bugReportDetails,
     stringify: true,
