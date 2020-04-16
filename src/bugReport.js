@@ -30,7 +30,7 @@ function getBrowserData() {
 }
 
 /**
- * 報告用オブジェクトを返す
+ * 報告用オブジェクトを返す
  *
  * @return {object} 報告用オブジェクト
  */
