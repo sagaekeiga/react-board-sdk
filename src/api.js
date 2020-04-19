@@ -8,9 +8,7 @@ import axios from 'axios'
 const createReport = async params => {
   const data = await axios.post(
     `https://react-board-api-dev.herokuapp.com/api/v1/reports`, {
-      params: {
-        title: params.body
-      }
+      params: params.body
     }
   )
   return data

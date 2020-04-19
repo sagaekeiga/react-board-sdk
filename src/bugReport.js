@@ -1,6 +1,15 @@
 import api from './api';
 import elem from './element';
 
+const ConfigData = {};
+
+/**
+ * set Project Token
+ */
+const setProjectToken = projectToken => {
+  ConfigData.projectToken = projectToken;
+}
+
 /**
  * 報告に使用するブラウザ情報を取得する
  */
@@ -48,6 +57,7 @@ function prepareBugReport() {
     density: window.devicePixelRatio,
     image: document.getElementById('capture').src,
     localStorage: JSON.stringify(localStorage),
+    projectToken: ConfigData.projectToken
   };
 
   return report;
@@ -74,6 +84,7 @@ function submitBugReport() {
 }
 
 export default {
+  setProjectToken,
   getBrowserData,
   submitBugReport
 };

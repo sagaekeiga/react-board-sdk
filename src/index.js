@@ -13,7 +13,13 @@ const domReady = (callback) => {
 /**
  * initSDK - 初期化処理
  */
-function initSDK() {
+function initSDK(options) {
+  if (options.projectToken) {
+    bugReport.setProjectToken(options.projectToken);
+  } else {
+    console.error('Reactboard WebSDK: Project token is not found');
+  }
+
   domReady(() => {
     views.addReportButton();
     element.hide('#reactboardSDK');
