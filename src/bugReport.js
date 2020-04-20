@@ -1,5 +1,6 @@
 import api from './api';
 import elem from './element';
+import html2canvas from 'html2canvas';
 
 const ConfigData = {};
 
@@ -43,8 +44,11 @@ function getBrowserData() {
  *
  * @return {object} 報告用オブジェクト
  */
-function prepareBugReport() {
+const prepareBugReport = async () => {
   const form = document.getElementById('reactboardForm');
+  const image = await html2canvas(document.querySelector('#canvas')).then(html2canvas => {
+    return html2canvas.toDataURL();
+  });
 
   const report = {
     reported_at: Date.now(),
@@ -55,7 +59,7 @@ function prepareBugReport() {
     locale: getBrowserData().locale,
     screen_size: `${window.innerWidth}x${window.innerHeight}`,
     density: window.devicePixelRatio,
-    image: document.getElementById('capture').src,
+    image: image,
     localStorage: JSON.stringify(localStorage),
     projectToken: ConfigData.projectToken
   };
@@ -70,8 +74,8 @@ const _prepareBugReportRequest = bugReportDetails => {
   });
 }
 
-function submitBugReport() {
-  const bugReport = prepareBugReport();
+const submitBugReport = async () => {
+  const bugReport = await prepareBugReport();
 
   elem.hide('#reactboardFormContainer');
   elem.show('#reactboardLoading');
