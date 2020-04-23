@@ -16,6 +16,7 @@
     background-repeat: no-repeat;
     cursor: pointer
 }
+
 #reactboardForm .reactboard-input {
     display: block;
     box-sizing: border-box;
@@ -28,7 +29,7 @@
     box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
     color: #0a0a0a;
     font-size: 1rem;
-    font-family: inherit
+    font-family: inherit !important;
 }
 #reactboardFormContainer,
 .reactboard-window {
@@ -39,8 +40,19 @@
 #reactboardForm input {
     height: 2.4375rem
 }
-#reactboardForm button,
-.reactboard-window button {
+
+.reactboard-window button.btn-default {
+    margin: 5px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: gray;
+    color: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.reactboard-window button.btn-primary {
     margin: 5px;
     padding: 8px 16px;
     border: 1px solid transparent;
@@ -48,7 +60,7 @@
     background-color: #1583cc;
     color: #ffffff;
     cursor: pointer;
-    -webkit-appearance: none
+    -webkit-appearance: none;
 }
 #reactboardFormContainer {
     right: 10px;
@@ -60,10 +72,14 @@
     background-color: #f9f9f9
 }
 .reactboard-window {
-    right: 10px;
-    bottom: 25px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
     padding: 20px;
-    width: 1000px;
+    max-width: 90%;
+    max-height: 90%;
     border: 1px solid #eeeeee;
     border-radius: 3px;
     background-color: #ffffff;
@@ -99,4 +115,67 @@
 }
 .u-disable-scrolling {
     overflow: hidden !important
+}
+
+.d-none {
+    display: none;
+}
+.loader,
+.loader:before,
+.loader:after {
+  background: black;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: black;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
 }

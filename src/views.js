@@ -16,10 +16,10 @@ let gColor = 'red';
 const draw = (canvas, imagePath) => {
   const image = new Image();
   image.addEventListener('load', () => {
-    canvas.width = 1000;
-    canvas.height = 500;
+    canvas.width = window.parent.screen.width*0.5
+    canvas.height = window.parent.screen.height*0.5
     const ctx = canvas.getContext('2d');
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, 0, 0, window.parent.screen.width*0.5, window.parent.screen.height*0.5);
   });
   image.src = imagePath;
 }
@@ -29,6 +29,8 @@ const takeScreenShot = () => {
     const imagePath = html2canvas.toDataURL();
     const canvas = document.getElementById('canvas');
     draw(canvas, imagePath);
+    elem.hide('.loader');
+    elem.show('#canvas');
 
     canvas.addEventListener('mousedown', startDraw, false);
     canvas.addEventListener('mousemove', Draw, false);
@@ -47,11 +49,11 @@ const Draw = e => {
   if (flgDraw == true) {
 
     // '2dコンテキスト'を取得
-    var canvas = document.getElementById('canvas');
-    var con = canvas.getContext('2d');
+    const canvas = document.getElementById('canvas');
+    const con = canvas.getContext('2d');
 
-    var x = e.offsetX;
-    var y = e.offsetY;
+    const x = e.offsetX;
+    const y = e.offsetY;
 
     // 線のスタイルを設定
     con.lineWidth = 3;

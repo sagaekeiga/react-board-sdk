@@ -1,5 +1,6 @@
 <form id="reactboardForm">
-  <canvas id="canvas"></canvas>
+  <div class="loader"></div>
+  <canvas id="canvas" class="d-none"></canvas>
   <textarea
   id="comment"
   class="reactboard-input"
@@ -9,11 +10,13 @@
   cols="50"></textarea>
 
   <button
+    class="btn-default"
     type="button"
     onclick="rbdSdk.resetAndClose()">
     キャンセル
   </button>
   <button
+    class="btn-primary"
     type="button"
     onclick="rbdSdk.submitReport()">
     報告する
