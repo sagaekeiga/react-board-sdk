@@ -1,20 +1,18 @@
 <form id="reactboardForm">
+  <button id="remove" class="btn btn-info">選択したものを消す</button>
+  <!-- <button id="freeLine" class="btn btn-info">自由線</button> -->
+  <button id="straightLine" class="btn btn-info">直線</button>
+  <button class="btn-default" type="button" onclick="rbdSdk.resetAndClose()">
+    キャンセル
+  </button>
   <div class="loader"></div>
   <canvas id="canvas"></canvas>
-  <textarea
+  <input
+  type="text"
   id="comment"
   class="reactboard-input"
   name="comment"
-  placeholder="どうしましたか？"
-  rows="4"
-  cols="50"></textarea>
-
-  <button
-    class="btn-default"
-    type="button"
-    onclick="rbdSdk.resetAndClose()">
-    キャンセル
-  </button>
+  placeholder="どうしましたか？">
   <button
     class="btn-primary"
     type="button"
