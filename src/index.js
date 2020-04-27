@@ -13,7 +13,7 @@ const domReady = (callback) => {
 /**
  * initSDK - 初期化処理
  */
-function initSDK(options) {
+const initSDK = options => {
   if (options.projectToken) {
     bugReport.setProjectToken(options.projectToken);
   } else {
@@ -33,7 +33,7 @@ function initSDK(options) {
 /**
  * RbdSdk - rbd SDK オブジェクト
  */
-function RbdSdk() {
+const RbdSdk = () => {
   return {
     init: initSDK,
     invoke: views.initBugreportViews,

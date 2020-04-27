@@ -17,12 +17,16 @@
     cursor: pointer
 }
 
+#canvas {
+    border: 1px solid #AAA;
+}
+
 #reactboardForm .reactboard-input {
-    display: block;
+    display: inline-block;
     box-sizing: border-box;
     margin: 0 0 1rem;
     padding: 0.5rem;
-    width: 100%;
+    width: 90%;
     border: 1px solid #dde4ed;
     border-radius: 3px;
     background-color: #ffffff;
@@ -41,6 +45,7 @@
     height: 2.4375rem
 }
 
+.canvas-container { margin:0 auto ; }
 .reactboard-window button.btn-default {
     margin: 5px;
     padding: 8px 16px;
