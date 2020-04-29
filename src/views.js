@@ -26,6 +26,9 @@ const addSubmitForm = () => {
  */
 const resetAndClose = () => {
   while (document.getElementsByClassName('rbdsdk-element').length) {
+    const reactboardLink = document.getElementById('initReactBoardLink');
+    reactboardLink.classList.remove('open');
+    reactboardLink.setAttribute('onclick', 'rbdSdk.invoke()')
     document.body.removeChild(document.getElementsByClassName('rbdsdk-element')[0]);
     elem.removeClass('body', 'u-disable-scrolling');
   }
@@ -79,6 +82,9 @@ function initBugreportViews() {
   addThankYouPage();
   if (!utils.isMobile()) {
     if (elem.isExisted('#reactboardFormContainer')) {
+      const reactboardLink = document.getElementById('initReactBoardLink');
+      reactboardLink.setAttribute('class', 'open')
+      reactboardLink.setAttribute('onclick', 'rbdSdk.resetAndClose()')
       elem.show('#reactboardFormContainer');
     }
   }

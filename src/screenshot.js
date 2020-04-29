@@ -2,9 +2,6 @@ import { fabric } from 'fabric';
 import html2canvas from 'html2canvas';
 import elem from './element';
 
-let state = [];
-let mods = 0;
-
 const takeScreenShot = () => {
   html2canvas(document.querySelector('body')).then(html2canvas => {
     const imagePath = html2canvas.toDataURL('image/jpeg', 1);
@@ -12,17 +9,27 @@ const takeScreenShot = () => {
 
     canvas.freeDrawingBrush.color = '#000000';
     canvas.freeDrawingBrush.width = 3;
-    canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), window.innerWidth / 480 * 0.1 );
+    const canvasContainer = window.document.getElementById('canvas-container')
 
     /*
       画像を描画する
     */
-    canvas.setHeight(window.innerWidth * 0.9);
-    canvas.setWidth(window.innerHeight * 0.9);
-    canvas.setDimensions({ width: window.innerWidth * 0.8, height: window.innerHeight * 0.8 });
+    canvas.setHeight(canvasContainer.clientHeight);
+    canvas.setWidth(canvasContainer.clientWidth);
 
-    fabric.Image.fromURL(imagePath, img => {
-      canvas.add(img);
+    fabric.Image.fromURL(imagePath, image => {
+      const scale = canvasContainer.clientWidth / image.width;
+      image.scale(scale);
+      image.set({
+        left: 0,
+        top: 0,
+        bottom: 0,
+        right: 0
+      });
+
+      console.log(image)
+
+      canvas.add(image);
       canvas.item(0).selectable = false;
     });
 
@@ -46,9 +53,6 @@ const takeScreenShot = () => {
     });
 
     canvas.on('mouse:wheel', opt => { zoom(opt, canvas) })
-
-    elem.hide('.loader');
-
   });
 }
 
@@ -57,18 +61,29 @@ const takeScreenShot = () => {
 */
 const zoom = (opt, canvas) => {
   //ポインタの位置取得
-  const mouseX = opt.pointer.x;
-  const mouseY = opt.pointer.y;
+  let mouseX = opt.pointer.x;
+  let mouseY = opt.pointer.y;
 
   //ホイール回転の取得
   const deltaY = opt.e.wheelDeltaY;
 
+
   //現在の拡大倍率の取得
   let zoom = canvas.getZoom();
 
-  if ((zoom + deltaY / 2400) < 0.09) { return }
+  if (0.95 <= zoom + deltaY / 2400 && zoom + deltaY / 2400 <= 1) {
+    canvas.item(0).set({
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0
+    })
+    canvas.renderAll();
+  } else {
+    if ((zoom + deltaY / 2400) <= 1) { return }
+    canvas.zoomToPoint(new fabric.Point(mouseX, mouseY), zoom + deltaY / 2400);
+  }
   //マウス位置を原点として拡大縮小
-  canvas.zoomToPoint(new fabric.Point(mouseX, mouseY), zoom + deltaY / 2400);
 }
 
 /*
